@@ -24,7 +24,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Blognook v1 API",
         default_version= "v1",
-        description= "Blognook is a versatile content management system (CMS) and blogging API that empowers users to effortlessly establish their own accounts and manage their personalized blogs within the application. This platform provides users with the ability to seamlessly publish, modify, and remove their content as they see fit.",
+        description= "Blognook is a versatile content management system (CMS) and blogging API that empowers users to effortlessly establish their own accounts and manage their personalized blogs within the application. This platform provides users with the ability to seamlessly publish, modify, and remove their content as they see fit.c",
         contact= openapi.Contact(email="olusamiracle@gmail.com")
     ), 
     public = True,
