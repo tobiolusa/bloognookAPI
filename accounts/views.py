@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from django.core.expections import ObjectDoesNotExist
+from rest_framework.permissions import IsAuthenticated
 from .models import CustomUser
 
 @api_view(['POST'])
@@ -35,3 +36,15 @@ def user_login(request):
         id user:
             token = Token.objects.get_or_create(user=user)
             return Response({'errors': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        
+        @api_view(['POST'])
+        permisson_classes = ([IsAuthenticated])
+        def user_logout(request):
+            if request.method == 'POST':
+                try:
+                    request.user.auth_token.delete()
+                    return Response({'message' : 'Successfully logout.'}, status=status.HTTP_200_OK)
+                except Expections as e:
+                    return Response({'error' : str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
