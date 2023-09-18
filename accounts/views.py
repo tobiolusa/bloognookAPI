@@ -37,8 +37,8 @@ def user_login(request):
             token = Token.objects.get_or_create(user=user)
             return Response({'errors': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         
-        
-        @api_view(['POST'])
+
+@api_view(['POST'])
         permisson_classes = ([IsAuthenticated])
         def user_logout(request):
             if request.method == 'POST':
@@ -47,4 +47,4 @@ def user_login(request):
                     return Response({'message' : 'Successfully logout.'}, status=status.HTTP_200_OK)
                 except Expections as e:
                     return Response({'error' : str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            
+                
