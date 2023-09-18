@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     ## Newly added libraries 
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_yasg',
 ]
 
