@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from django.core.exceptions import ObjectDoesNotExist
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import CustomUser
 
 @api_view(['POST'])
@@ -48,3 +48,9 @@ def user_logout(request):
         except Expections as e:
             return Response({'error' : str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
                 
+@api_view(['GET'])
+def total_users(request):
+    if request.method == 'GET':
+        active_users = CustomUser.objects.all()
+        return Response(active_users)
+    
