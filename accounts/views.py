@@ -47,8 +47,9 @@ def user_logout(request):
     if request.method == 'POST':
         try:
             request.user.auth_token.delete()
+            auth_token.delete()
             return Response({'message' : 'Successfully logout.'}, status=status.HTTP_200_OK)
-        except Expections as e:
+        except Exception as e:
             return Response({'error' : str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
                 
 @api_view(['GET'])
