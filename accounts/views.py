@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import CustomUser
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def register_user(request):
     if request.method == 'POST':
         serializer = UserSerializer(data=request.data)
@@ -19,6 +20,7 @@ def register_user(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def user_login(request):
     if request.method == 'POST':
         username = request.data.get('username')
@@ -34,8 +36,9 @@ def user_login(request):
         if not user:
             user = authenticate(username=username, password=password)
         if user:
-            token = Token.objects.get_or_create(user=user)
-            return Response({'errors': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
+        return Response({'errors': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         
 
 @api_view(['POST'])
