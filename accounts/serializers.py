@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import CustomUser, UserProfile
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,4 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
         new_user.set_password(validated_data['password'])
         new_user.save()
         return new_user
-        
+    
+class UserProfileSerializer(serializers.ModelSerializer):
+    model = UserProfile
+    fields = '__all__'
+    
