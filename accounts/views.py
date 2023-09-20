@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import CustomUser
+from rest_framework import generics
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -51,10 +52,10 @@ def user_logout(request):
             return Response({'message' : 'Successfully logout.'}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error' : str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-                
-@api_view(['GET'])
-def total_users(request):
-    if request.method == 'GET':
-        active_users = CustomUser.objects.all()
-        return Response(active_users)
     
+@api_view(['GET']) 
+@permission_classes([IsAuthenticated])
+def user_list(request):
+    queryset = CustomUser.objects.all()
+    serializer = UserSerializer(queryset, many=True)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
