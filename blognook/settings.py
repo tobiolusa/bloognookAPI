@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     ## Newly added apps 
     'accounts',
+    'blogcms',
     ## Newly added libraries 
     'rest_framework',
     'rest_framework.authtoken',
