@@ -2,7 +2,10 @@ from rest_framework import serializers
 from .models import CustomUser, UserProfile
 
 class UserSerializer(serializers.ModelSerializer):
+    posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+      
     class Meta:
+        
         model = CustomUser
         fields = ['username', 'email', 'password']
         extra_kwargs = {'password': {'write_only': True}}
