@@ -9,7 +9,7 @@ class BlogPost(models.Model):
     author  = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.title
+        return f'{self.title} : written by {self.author}'
     
     class Meta:
         ordering =['created_on']

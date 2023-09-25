@@ -17,4 +17,3 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
     permissions_classes = ['IsOwnerOrReadOnly', 'IsAuthenticatedOrReadOnly']
-
